@@ -81,7 +81,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.3)
     base64 (0.3.0)
-    bcrypt (3.1.20)
+    bcrypt (3.1.22)
     benchmark (0.5.0)
     bigdecimal (4.1.2)
     bindex (0.8.1)
@@ -149,12 +149,12 @@ GEM
       railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
-    faraday (2.12.2)
+    faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.4.0)
-      net-http (>= 0.5.0)
+    faraday-net_http (3.4.2)
+      net-http (~> 0.5)
     ferrum (0.17.1)
       addressable (~> 2.5)
       base64 (~> 0.2)
@@ -196,7 +196,7 @@ GEM
     jbuilder (2.14.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
-    json (2.15.0)
+    json (2.19.5)
     jwt (2.10.1)
       base64
     language_server-protocol (3.17.0.5)
@@ -220,8 +220,8 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.9.1)
       bigdecimal (>= 3.1, < 5)
-    net-http (0.6.0)
-      uri
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     net-imap (0.5.10)
       date
       net-protocol
@@ -473,7 +473,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_hash
-  bcrypt (~> 3.1.20)
+  bcrypt (~> 3.1.22)
   bootsnap
   brakeman
   bundler-audit
@@ -521,4 +521,4 @@ RUBY VERSION
    ruby 3.3.4p94
 
 BUNDLED WITH
-   2.5.9
+   2.5.11
