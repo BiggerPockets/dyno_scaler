@@ -29,6 +29,9 @@ module Dynoscaler
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # Nothing in the app attaches images, so there are no variants to generate.
+    config.active_storage.variant_processor = :disabled
+
     config.x.log_drain.hostname = ENV.fetch('LOG_DRAIN_HOSTNAME')
 
     config.x.google_oauth = {
