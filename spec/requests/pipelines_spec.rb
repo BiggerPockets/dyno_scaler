@@ -52,7 +52,7 @@ RSpec.describe 'Pipelines' do
   describe 'POST /pipelines' do
     it 'returns HTTP Unprocessable Entity for manager' do
       post pipelines_path(as: manager, params: { pipeline: { name: 'test' } })
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it 'returns HTTP Forbidden for viewer' do
