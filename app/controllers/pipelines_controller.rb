@@ -9,7 +9,7 @@ class PipelinesController < ApplicationController
   end
 
   def show
-    @pipeline = current_organisation.pipelines.find(params[:id])
+    @pipeline = current_organisation.pipelines.find(params.expect(:id))
 
     respond_to do |format|
       format.html
@@ -28,7 +28,7 @@ class PipelinesController < ApplicationController
   end
 
   def edit
-    @pipeline = current_organisation.pipelines.find(params[:id])
+    @pipeline = current_organisation.pipelines.find(params.expect(:id))
   end
 
   def create
@@ -39,22 +39,22 @@ class PipelinesController < ApplicationController
 
       redirect_to pipeline_url(@pipeline), notice: 'Pipeline was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
   def update
-    @pipeline = current_organisation.pipelines.find(params[:id])
+    @pipeline = current_organisation.pipelines.find(params.expect(:id))
 
     if @pipeline.update(update_pipeline_params)
       redirect_to pipeline_url(@pipeline), notice: 'Pipeline was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
   def destroy
-    @pipeline = current_organisation.pipelines.find(params[:id])
+    @pipeline = current_organisation.pipelines.find(params.expect(:id))
     @pipeline.destroy
 
     redirect_to pipelines_url, notice: 'Pipeline was successfully destroyed.'

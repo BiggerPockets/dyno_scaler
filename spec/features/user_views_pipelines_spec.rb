@@ -24,7 +24,7 @@ describe 'User views pipeline' do
 
     visit pipeline_path(pipeline, as: user)
 
-    expect(page).to have_content(/Alpha.*Bravo.*Charlie.*Delta/)
+    expect(page).to have_text(/Alpha.*Bravo.*Charlie.*Delta/)
   end
 
   it 'automatically refreshes the review apps list', :js do
@@ -33,14 +33,14 @@ describe 'User views pipeline' do
     review_app = create(:review_app, pipeline:, branch: 'Alpha', last_active_at: 1.day.ago)
 
     visit pipeline_path(pipeline, as: user)
-    expect(page).to have_content(/Alpha.*1 day ago/)
+    expect(page).to have_text(/Alpha.*1 day ago/)
 
     review_app.request_received
     create(:review_app, pipeline:, branch: 'Bravo', last_active_at: nil)
 
     page.driver.wait_for_network_idle
-    expect(page).to have_content(/Alpha.*less than a minute ago/)
-    expect(page).to have_content(/Bravo.*Unknown/)
+    expect(page).to have_text(/Alpha.*less than a minute ago/)
+    expect(page).to have_text(/Bravo.*Unknown/)
   end
 
   it 'allows the user to disable automatic refreshes of the review app list', :js do
@@ -52,6 +52,6 @@ describe 'User views pipeline' do
     create(:review_app, pipeline:, branch: 'ke/annoyed_that_this_uses_sleep')
 
     sleep Rails.application.config.x.polling_interval_seconds * 1.5
-    expect(page).to have_no_content('ke/annoyed_that_this_uses_sleep')
+    expect(page).to have_no_text('ke/annoyed_that_this_uses_sleep')
   end
 end
