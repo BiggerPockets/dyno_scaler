@@ -3,7 +3,7 @@
 module StyleButtonHelper
   def button_base_class
     [
-      'focus:outline-none',
+      'focus:outline-hidden',
       'text-white',
       'focus:ring-4',
       'font-medium',
