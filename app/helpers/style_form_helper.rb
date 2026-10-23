@@ -7,7 +7,7 @@ module StyleFormHelper
 
   def field_class
     [
-      'shadow-sm',
+      'shadow-xs',
       'bg-gray-50',
       'border',
       'border-gray-300',
@@ -62,7 +62,7 @@ module StyleFormHelper
       'text-blue-600 ',
       'bg-gray-100 ',
       'border-gray-300 ',
-      'rounded ',
+      'rounded-sm ',
       'focus:ring-blue-500 ',
       'dark:focus:ring-blue-600 ',
       'dark:ring-offset-gray-800 ',
