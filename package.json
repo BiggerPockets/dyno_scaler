@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "flowbite": "^4.0.2",
     "tailwindcss": "^4.3.3"
