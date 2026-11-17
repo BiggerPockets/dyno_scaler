@@ -23,20 +23,28 @@ RSpec.describe Pipeline do
     it 'is invalid when smallest dyno size is placed in boost_size' do
       expect(build(:pipeline, boost_size: DynoSize.smallest)).not_to be_valid
     end
+
+    it 'is invalid when base_size is smaller than Standard-2X' do
+      expect(build(:pipeline, base_size: DynoSize.standard_1x)).not_to be_valid
+    end
+
+    it 'is valid when base_size is Standard-2X' do
+      expect(build(:pipeline, base_size: DynoSize.standard_2x)).to be_valid
+    end
   end
 
   describe 'associations' do
     it 'updates associated review apps when base_size is updated' do
-      pipeline = create(:pipeline, base_size: DynoSize.eco)
+      pipeline = create(:pipeline, base_size: DynoSize.standard_2x)
       create_list(:review_app, 3, pipeline:)
 
-      pipeline.update(base_size: DynoSize.standard_1x)
+      pipeline.update(base_size: DynoSize.performance_m)
 
-      expect(pipeline.review_apps.pluck(:base_size_id).uniq).to eql([DynoSize.standard_1x.id])
+      expect(pipeline.review_apps.pluck(:base_size_id).uniq).to eql([DynoSize.performance_m.id])
     end
 
     it 'updates associated review apps when boost_size is updated' do
-      pipeline = create(:pipeline, boost_size: DynoSize.basic)
+      pipeline = create(:pipeline, boost_size: DynoSize.performance_m)
       create_list(:review_app, 3, pipeline:)
 
       pipeline.update(boost_size: DynoSize.performance_l)

@@ -7,8 +7,8 @@ describe 'Manager edits a pipeline' do
     pipeline = create(
       :pipeline,
       name: 'My Pipeline',
-      base_size: DynoSize.eco,
-      boost_size: DynoSize.basic,
+      base_size: DynoSize.standard_2x,
+      boost_size: DynoSize.performance_m,
       set_env: true
     )
     user = create(:user, :manager, organisation: pipeline.organisation)
@@ -16,21 +16,23 @@ describe 'Manager edits a pipeline' do
     visit pipeline_path(pipeline, as: user)
     click_on 'Edit'
 
-    select 'Basic', from: 'Base dyno type'
-    select 'Standard-1X', from: 'Boost dyno type'
+    select 'Performance-M', from: 'Base dyno type'
+    select 'Performance-L', from: 'Boost dyno type'
     uncheck 'Set env variable'
 
     click_on 'Update Pipeline'
     expect(page).to have_text 'Pipeline was successfully updated'
 
     click_on 'Edit'
-    expect(page).to have_select('Base dyno type', selected: 'Basic')
-    expect(page).to have_select('Boost dyno type', selected: 'Standard-1X')
+    expect(page).to have_select('Base dyno type', selected: 'Performance-M')
+    expect(page).to have_select('Boost dyno type', selected: 'Performance-L')
     expect(page).to have_unchecked_field('Set env variable')
   end
 
   it 'disables editing of the uuid' do
-    pipeline = create(:pipeline, name: 'My Pipeline', base_size: DynoSize.eco, boost_size: DynoSize.basic)
+    pipeline = create(
+      :pipeline, name: 'My Pipeline', base_size: DynoSize.standard_2x, boost_size: DynoSize.performance_m
+    )
     user = create(:user, :manager, organisation: pipeline.organisation)
 
     visit edit_pipeline_path(pipeline, as: user)

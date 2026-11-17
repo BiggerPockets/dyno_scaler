@@ -16,19 +16,25 @@ class DynoSize < ActiveHash::Base
     end
   end
 
+  # The smallest size a pipeline can scale to. The BiggerPockets app runs out
+  # of memory booting on anything smaller than Standard-2X.
   def self.smallest
-    eco
+    standard_2x
   end
 
   def self.largest
     performance_l
   end
 
+  def self.selectable
+    where(id: (smallest.id..largest.id).to_a)
+  end
+
   def self.base_sizes
-    where.not(id: largest.id)
+    selectable.where.not(id: largest.id)
   end
 
   def self.boost_sizes
-    where.not(id: smallest.id)
+    selectable.where.not(id: smallest.id)
   end
 end
