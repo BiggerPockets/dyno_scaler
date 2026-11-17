@@ -47,7 +47,7 @@ RSpec.describe ReviewApp do
     end
 
     it 'enqueues FormationUpdateJob if current dyno isnt the optiomal size' do
-      pipeline = create(:pipeline, base_size: DynoSize.basic, boost_size: DynoSize.standard_2x)
+      pipeline = create(:pipeline, base_size: DynoSize.standard_2x, boost_size: DynoSize.performance_m)
       review_app = create(:review_app, pipeline:, current_size: pipeline.base_size, last_active_at: 31.minutes.ago)
 
       expect { review_app.request_received }.to change(FormationUpdateJob.jobs, :size).by(1)
